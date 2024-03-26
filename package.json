@@ -1,6 +1,6 @@
 {
-  "name": "gild",
-  "version": "0.1.1",
+  "name": "create-gild-app",
+  "version": "0.1.2",
   "description": "a helpful tool to setup a gild project",
   "type": "module",
   "bin": "main.js",
