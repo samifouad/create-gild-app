@@ -6,18 +6,17 @@ helpful wizard to setup a gild project
 
 Pick your package manager:
 `npx create-gild-app@latest`
+
 `yarn create gild-app@latest`
+
 `pnpm create gild-app@latest`
+
+`bunx create gild-app@latest`
 
 ## Project Status
 
 Alpha / Experimental
 
-## Changelog
+## TODO
 
-***v0.1.0***
-
-note: just settings things up, this is not operational yet
-
--checks for erlang, gleam & homebrew added
--picks between only react & svelte for now
+See TODO.md for roadmap
