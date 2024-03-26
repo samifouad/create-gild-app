@@ -1,6 +1,6 @@
 {
   "name": "gild",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "a helpful tool to setup a gild project",
   "type": "module",
   "bin": "main.js",
