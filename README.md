@@ -2,9 +2,12 @@
 
 helpful wizard to setup a gild project
 
+design your infrastructure as code
+
 ## Install
 
 Pick your package manager:
+
 `npx create-gild-app@latest`
 
 `yarn create gild-app@latest`

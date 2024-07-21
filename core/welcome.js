@@ -6,31 +6,27 @@ export default async function () {
     console.log(chalk.bgMagenta(' create gild app ') +' ' + chalk.magenta('v0.1.0') + ' welcome!\n')
 
 
-    const e_spinner = createSpinner('is Erlang installed?').start();
-    const isErlangInstalled = await sysCheck("erl -eval 'erlang:display(erlang:system_info(otp_release)), halt().'  -noshell")
-    if (isErlangInstalled) {
-        e_spinner.success()
+    const ga_spinner = createSpinner('is Gild installed?').start();
+    const isGildAgentInstalled = await sysCheck('gild --version')
+    if (isGildAgentInstalled) {
+        ga_spinner.success()
     } else {
-        e_spinner.error()
-
+        ga_spinner.error()
     }
 
-
-    const g_spinner = createSpinner('is Gleam installed?').start()
-    const isGleamInstalled = await sysCheck('gleam --version')
-    if (isGleamInstalled) {
-        g_spinner.success()
-        console.log('\n')
+    const i_spinner = createSpinner('is Incus installed?\n').start();
+    const isIncusInstalled = await sysCheck('incus --version')
+    if (isIncusInstalled) {
+        i_spinner.success()
     } else {
-        g_spinner.error()
+        i_spinner.error()
     }
 
-
-    if (isErlangInstalled && isGleamInstalled) {
+    if (!isGildAgentInstalled && !isIncusInstalled) {
         return
     }
 
-    console.log('uh oh! looks like a required dependency is missing!\n\n')
+    console.log('uh oh! looks like a required dependency is missing!\n')
 
     const b_spinner = createSpinner('is homebrew installed?').start()
     const isHomebrewInstalled = await sysCheck('brew --version')
@@ -42,13 +38,12 @@ export default async function () {
 
     if (isHomebrewInstalled) {
 
-        console.log('\nyou do have '+ chalk.magenta('homebrew') +' installed, so you can simply run '+ chalk.magenta('brew install gleam') +' to make sure both requirements are met.\n')
-        console.log('full installation options can be found here: https://gleam.run/getting-started/installing\n')
+        console.log('you do have '+ chalk.magenta('homebrew') +' installed, so you can run '+ chalk.magenta('brew install gild incus') +' to make sure both requirements are met.\n')
         console.log('after that, run this command again to continue.\n')
 
     } else {
 
-        console.log('\nfull installation options can be found here: https://gleam.run/getting-started/installing\n')
+        console.log('full installation options can be found here: https://gild.gg/install\n')
         console.log('after that, run this command again to continue.\n')
 
     }

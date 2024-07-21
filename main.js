@@ -31,10 +31,10 @@ await questions.location(config.name).then((answer) => {
 });
 await core.runner();
 
-await questions.style().then((answer) => {
-    config.style = answer.result;
-});
-await core.runner();
+// await questions.style().then((answer) => {
+//     config.style = answer.result;
+// });
+// await core.runner();
 
 await questions.gitSetup().then((answer) => {
     config.git = answer.result;
@@ -43,37 +43,37 @@ await core.runner();
 
 // run handlers
 try {
-    console.log('\n Generating package.json');
+    console.log('\n Generating gild.json');
     await handlers.json(config).then((err) => {
         if (err == '1') {
-            throw new Error('error generating package.json')
+            throw new Error('error generating gild.json')
         }
     });
 
-    console.log('\n Fetching starter template to '+ config.location);
-    await handlers.fetchTemplate(config.location).then((err) => {
-        if (err == '1') {
-            throw new Error('error fetching template')
-        }
-    });
+    // console.log('\n Fetching starter template to '+ config.location);
+    // await handlers.fetchTemplate(config.location).then((err) => {
+    //     if (err == '1') {
+    //         throw new Error('error fetching template')
+    //     }
+    // });
 
     if (config.git === 'Yes') {
         console.log('\n Setting up git repo');
-        await handlers.git().then((err) => {
+        await handlers.git(config).then((err) => {
             if (err == '1') {
                 throw new Error('error setting up git repo')
             }
         })
     }
 
-    if (config.deps === 'Yes') {
-        console.log('\n Installing dependencies');
-        await handlers.deps().then((err) => {
-            if (err == '1') {
-                throw new Error('error installing frontend dependencies')
-            }
-        });
-    }
+    // if (config.deps === 'Yes') {
+    //     console.log('\n Installing dependencies');
+    //     await handlers.deps().then((err) => {
+    //         if (err == '1') {
+    //             throw new Error('error installing frontend dependencies')
+    //         }
+    //     });
+    // }
 
     // all done
     process.exit(0)

@@ -1,5 +1,4 @@
 // @ts-nocheck
-import PackageJson from '@npmcli/package-json';
 import { createSpinner } from 'nanospinner';
 import fs from  'fs/promises'; 
 
@@ -29,37 +28,23 @@ export default async function json(config) {
     };
 
     // check if package.json exists
-    if (await exists(config.location +'/package.json')) {
+    if (await exists(config.location +'/gild.json')) {
         spinner.error({ text: 'package.json already exists'});
         return "1";
     } else {
         // add empty object to file for load to work
-        fs.writeFile(config.location +'/package.json', '{}', { flag: 'w' });
+        fs.writeFile(config.location +'/gild.json', '{}', { flag: 'w' });
     }
 
-    // load empty package.json
-    const pkgJson = await PackageJson.load(config.location);
-
+    // create gild.json
     let obj = {
       name: config.name,
-      version: '0.1.0',
       description: 'cool new app project',
-      type: "module",
-      main: 'index.js',
-      scripts: {
-        "start": "serve ./public",
-      },
-      dependencies: {
-        "@fromafrica/rex": '^0.1.0',
-        "serve": '^14.0.0',
-      },
     };
 
     // safe defaults + selected options
-    pkgJson.update(obj);
-
-    // write to file
-    await pkgJson.save();
+    // TODO: error handling in case of issues writing to file
+    fs.writeFile(config.location +'/gild.json', JSON.stringify(obj, null, 2), { flag: 'w' });
     
     spinner.success({ text: 'Ok'});
     return "0";
